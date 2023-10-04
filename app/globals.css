@@ -2,26 +2,350 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+.goldencss {
+    background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+.silvercss {
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #ffffff;
+    box-shadow:
+      2px 2px 0.5em rgba(122, 122, 122, 0.55),
+      inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.34)
+    ;
+    border: 1px solid #dedede;
+    background:
+      -moz-linear-gradient(
+      -72deg,
+      #dedede,
+      #ffffff 16%,
+      #dedede 21%,
+      #ffffff 24%,
+      #454545 27%,
+      #dedede 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedede 72%,
+      #ffffff 80%,
+      #dedede 84%,
+      #a1a1a1
+    );
+    background:
+    -webkit-linear-gradient(
+      -72deg,
+      #dedede,
+      #ffffff 16%,
+      #dedede 21%,
+      #ffffff 24%,
+      #454545 27%,
+      #dedede 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedede 72%,
+      #ffffff 80%,
+      #dedede 84%,
+      #a1a1a1
+    );
+    background:
+    -o-linear-gradient(
+      -72deg,
+      #dedede,
+      #ffffff 16%,
+      #dedede 21%,
+      #ffffff 24%,
+      #454545 27%,
+      #dedede 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedede 72%,
+      #ffffff 80%,
+      #dedede 84%,
+      #a1a1a1
+    );
+    background:
+    linear-gradient(
+      -72deg,
+      #dedede,
+      #ffffff 16%,
+      #dedede 21%,
+      #ffffff 24%,
+      #454545 27%,
+      #dedede 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedede 72%,
+      #ffffff 80%,
+      #dedede 84%,
+      #a1a1a1
+    );
+  }
+
+  .bronzecss {
+    color: rgba(45, 00, 0, 0.55);
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #dea173;
+    box-shadow:
+      2px 2px 0.5em rgba(122, 55, 34, 0.55),
+      inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    ;
+    border: 1px solid #dea173;
+    background:
+    -moz-linear-gradient(
+      -72deg,
+      #ca7345,
+      #ffdeca 16%,
+      #ca7345 21%,
+      #ffdeca 24%,
+      #a14521 27%,
+      #ca7345 36%,
+      #ffdeca 45%,
+      #ffdeca 60%,
+      #ca7345 72%,
+      #ffdeca 80%,
+      #ca7345 84%,
+      #732100
+    );
+    background:
+    -webkit-linear-gradient(
+      -72deg,
+      #ca7345,
+      #ffdeca 16%,
+      #ca7345 21%,
+      #ffdeca 24%,
+      #a14521 27%,
+      #ca7345 36%,
+      #ffdeca 45%,
+      #ffdeca 60%,
+      #ca7345 72%,
+      #ffdeca 80%,
+      #ca7345 84%,
+      #732100
+    );
+    background:
+    -o-linear-gradient(
+      -72deg,
+      #ca7345,
+      #ffdeca 16%,
+      #ca7345 21%,
+      #ffdeca 24%,
+      #a14521 27%,
+      #ca7345 36%,
+      #ffdeca 45%,
+      #ffdeca 60%,
+      #ca7345 72%,
+      #ffdeca 80%,
+      #ca7345 84%,
+      #732100
+    );
+    background:
+    linear-gradient(
+      -72deg,
+      #ca7345,
+      #ffdeca 16%,
+      #ca7345 21%,
+      #ffdeca 24%,
+      #a14521 27%,
+      #ca7345 36%,
+      #ffdeca 45%,
+      #ffdeca 60%,
+      #ca7345 72%,
+      #ffdeca 80%,
+      #ca7345 84%,
+      #732100
+    );
+  }
+  
+  .platinumcss {
+    color: rgba(0, 0, 0, 0.72);
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 #ffffff;
+    box-shadow:
+      2px 2px 0.5em rgba(122, 122, 122, 0.55),
+      inset 1px 1px 0 rgba(255, 255, 255, 0.9),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    ;
+    border: 1px solid #cacade;
+    background:
+      -moz-linear-gradient(
+      -72deg,
+      #dedeff,
+      #ffffff 16%,
+      #dedeff 21%,
+      #ffffff 24%,
+      #555564 27%,
+      #dedeff 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedeff 72%,
+      #ffffff 80%,
+      #dedeff 84%,
+      #555564
+    );
+    background:
+    -webkit-linear-gradient(
+      -72deg,
+      #dedeff,
+      #ffffff 16%,
+      #dedeff 21%,
+      #ffffff 24%,
+      #555564 27%,
+      #dedeff 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedeff 72%,
+      #ffffff 80%,
+      #dedeff 84%,
+      #555564
+    );
+    background:
+    -o-linear-gradient(
+      -72deg,
+      #dedeff,
+      #ffffff 16%,
+      #dedeff 21%,
+      #ffffff 24%,
+      #555564 27%,
+      #dedeff 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedeff 72%,
+      #ffffff 80%,
+      #dedeff 84%,
+      #555564
+    );
+    background:
+    linear-gradient(
+      -72deg,
+      #dedeff,
+      #ffffff 16%,
+      #dedeff 21%,
+      #ffffff 24%,
+      #555564 27%,
+      #dedeff 36%,
+      #ffffff 45%,
+      #ffffff 60%,
+      #dedeff 72%,
+      #ffffff 80%,
+      #dedeff 84%,
+      #555564
+    );
+  }
+  
+  .carboncss {
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.45);
+    border: 1px solid #565656;
+    box-shadow:
+      2px 2px 0.5em rgba(0, 0, 0, 0.55),
+      inset 1px 1px 0 rgba(255, 255, 255, 0.55),
+      inset -1px -1px 0 rgba(0, 0, 0, 0.5)
+    ;
+    background:
+      -moz-repeating-linear-gradient(
+      top, #565656, #131313 2px, #565656 1px
+    );
+    background:
+      -o-repeating-linear-gradient(
+      top, #565656, #131313 2px, #565656 1px
+    );
+    background:
+      -webkit-repeating-linear-gradient(
+      top, #565656, #131313 2px, #565656 1px
+    );
+    background:
+      repeating-linear-gradient(
+      top, #565656, #131313 2px, #565656 1px
+    );
+  }
+  
+
+
+  /* for the backgrounnd ui */
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+*/
+
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 120px 24px 160px 24px;
+  pointer-events: none;
+}
+
+.main:before {
+  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
+  position: absolute;
+  content: "";
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+.main:after {
+  content: "";
+  background-image: url("/app/grid.svg");
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  opacity: 0.4;
+  filter: invert(1);
+}
+
+.gradient {
+  height: fit-content;
+  z-index: 3;
+  width: 100%;
+  max-width: 640px;
+  background-image: radial-gradient(
+      at 27% 37%,
+      hsla(215, 98%, 61%, 1) 0px,
+      transparent 0%
+    ),
+    radial-gradient(at 97% 21%, hsla(125, 98%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
+    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  filter: blur(100px) saturate(150%);
+  top: 80px;
+  opacity: 0.15;
+}
+
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 0;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* Tailwind Styles */
+
+.app {
+  @apply relative z-10 flex justify-center items-center flex-col max-w-7xl mx-auto sm:px-16 px-6;
 }
+

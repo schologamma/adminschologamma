@@ -1,0 +1,44 @@
+      committe data->>
+      name:"",
+        email:"",
+        description:"",
+        password:"",
+        cpassword:"",
+        username:"",
+        photo:""
+Events database ->>
+
+     name:"",
+        type:"",
+        organizer:"",
+        sdate :"",
+        edate:"",
+        venue:"",
+        poster:"",
+        description:"",
+        joinLink:""
+
+Sldier database -->>
+          imageLink:"" ,
+        description:"" 
+
+
+teams profile database :-->
+{
+    name:"",
+    BT_ID:"",
+    DOB:"",
+    position:"" ,
+    type:"" ,
+    linkedinUrl:"",
+    facebookUrl:"",
+    instragramUrl:"",
+    currentYear:"",
+    photoUrl:"",
+    description:"",
+    skill:"",
+    cgpa:"",
+    hobby:""
+
+
+}
