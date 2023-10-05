@@ -5,7 +5,7 @@ import {Teams ,
   Nav,
   Committe,
 Hero } from '@/components'
-import { useContext } from 'react';
+import { useContext  , useEffect} from 'react';
 import DataContext from '@/context/data/DataContext';
 import { useRouter } from 'next/navigation';
 // import RawLog
