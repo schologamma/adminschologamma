@@ -29,6 +29,7 @@ if(check){
 
 
 }
+// E:\learing code\schologamma\admin\app\api\committee\add\route.js
 
     const committee = await new Committee({...data  , password:haspass })
 

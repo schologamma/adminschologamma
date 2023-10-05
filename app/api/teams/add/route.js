@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt'
 
 export const POST = async(req)=>{
     const data= await req.json();
-
+// window.sessionStorage
 // for bcrypit
 const saltRounds = 10;
 const text_password = password;

@@ -2,19 +2,24 @@
 import DataContext from "./DataContext";
 import { useState ,useEffect } from "react";
 const DataState = (props)=>{
-
+// localStorage
+// sessionStorage
     const [auth, setAuth] = useState(() => {
         // Try to retrieve auth from sessionStorage when the component mounts
         // if (typeof window !== 'undefined') 
-        const storedAuth = sessionStorage.getItem("auth");
+        if (typeof window !== 'undefined') {
+        const storedAuth = window.sessionStorage.getItem("auth");
         return storedAuth
           ? JSON.parse(storedAuth)
           : {
               user: false,
               authtoken: null,
             };
+          }
+          return { user: false,
+            authtoken: null,}
         
-      });
+});
    const [alert,setAlert] = useState({type:null, msg:""})
     const data = {
         name:"harish"
@@ -27,13 +32,14 @@ const setAlertFunc = (type , msg)=>{
 
   // Store auth in sessionStorage whenever it changes
   useEffect(() => {
-    sessionStorage.setItem("auth", JSON.stringify(auth));
+    window.sessionStorage.setItem("auth", JSON.stringify(auth));
   }, [auth]);
 // for logout and destorythe function
 const logout = () => {
     // Clear the auth data from sessionStorage and set auth state to initial values
+    if (typeof window !== 'undefined') {
     
-    sessionStorage.removeItem("auth");
+    sessionStorage.removeItem("auth"); }
     setAuth({
       user: false,
       authtoken: null,
