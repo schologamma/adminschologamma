@@ -14,7 +14,7 @@ export default function Home() {
   const router = useRouter()
   const dd = useContext(DataContext) ;
   if(dd.auth.user ===false){
-router.push('/join/login')
+return router.push('/join/login')
   }
   // const { state, dispatch } = useSession();
   return (
