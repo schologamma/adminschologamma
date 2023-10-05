@@ -1,6 +1,6 @@
 "use client" ;
 import React  , {useState}from 'react'
-import {CommButton, FormInput ,FormInput1} from '@/components'
+import {CommButton ,FormInput1} from '@/components'
 import { committeeList} from '@/constants'
 
 function AddEvent() {

@@ -4,8 +4,8 @@ import Committe from "./Committte";
 import Teams from "./Teams";
 import Hero from "./Hero";
 import Title from "./Title";
-import FormInput from "./FormInput";
 import FormInput1 from "./FormInput1";
+import FormInput from "./FormInput";
 import CommButton from "./CommButton";
 import EventCard from "./EventCard";
 import SignIn from "./SignIn";
@@ -17,8 +17,8 @@ export  {
     Committe,
 Hero,
 Title,
-FormInput,
 FormInput1,
+FormInput ,
 CommButton,
 EventCard,
 SignIn,

@@ -28,7 +28,7 @@ const CardCategory = (type ,data ) =>{
 {
     [{type:"admin"},{type:"admin"} ,{type:"admin"} ,{type:"admin"} ,{type:"admin"} ,{type:"admin"} ,{type:"admin"}, {type:"admin"} ,{type:"admin"} , {type:"head"}].map((item , index)=>{
         if(item.type ==="admin")
-        return <Profileuicons />
+        return <Profileuicons  key={index} />
         
     } 
     ) 

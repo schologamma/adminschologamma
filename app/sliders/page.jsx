@@ -1,5 +1,5 @@
 "use client" ;
-import { FormInput, FormInput1, Title } from '@/components'
+import {  FormInput1, Title } from '@/components'
 import React,{useState} from 'react'
 import {sliderdata} from '@/constants'
 import Link from 'next/link';
