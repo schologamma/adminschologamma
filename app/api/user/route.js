@@ -20,7 +20,7 @@ try {
     console.log("Database connected Sucesssully")
 const check = await User.findOne({username})
 if(check){
-    return new Response(JSON.stringify({msg:"THis username has already taken" , ok:true}) , {status:200})
+    return new Response(JSON.stringify({msg:"This username has already taken" , ok:true , type:"warning"}) , {status:200})
 
 
 }
@@ -29,12 +29,24 @@ if(check){
 
     await user.save() ;
     console.log(user)
-return new Response(JSON.stringify({...user , ok:true}) , {status:200})
+return new Response(JSON.stringify({msg:"Account Creation SuccessFully!" , type:"success", ok:true}) , {status:200})
 
 } catch (error) {
 console.log(error)
-console.log(error)
-    return new Response(JSON.stringify("Failed to fetch the prompt for user"))
+// console.log(error)
+const err = []
+if(error?.errors){
+    const object = error.errors
+    for (const key in object) {
+        const value = object[key];
+err.push((`${key} :${value.message} `))
+
+       }
+        const errtext = err.join('\n')
+       return new Response(JSON.stringify({msg:"Failed to fetch the data for user" ,error:errtext, type:'error',ok:false}))
+
+}
+    return new Response(JSON.stringify({msg:"Failed to fetch the data for user" ,error:error, type:'error',ok:false}))
 }
 
 }

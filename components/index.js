@@ -10,6 +10,7 @@ import CommButton from "./CommButton";
 import EventCard from "./EventCard";
 import SignIn from "./SignIn";
 import Model from "./Model";
+import Alert from "./Alert";
 export  {
     Teams ,
     Nav,
@@ -21,7 +22,9 @@ FormInput1,
 CommButton,
 EventCard,
 SignIn,
-Model
+Model,
+Alert
+
 
 
 

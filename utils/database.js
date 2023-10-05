@@ -24,3 +24,12 @@ export const connectToDB = async () => {
     console.log(error);
   }
 }
+
+
+// usernameValidation.js
+
+// Import your database functions to check for username uniqueness
+// import { isUsernameUnique } from './database'; // You need to implement this function
+
+// Define a function to validate the username
+

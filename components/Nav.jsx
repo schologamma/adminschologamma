@@ -8,15 +8,15 @@ const Nav =()=>{
 
   const dd = useContext(DataContext)
 
-    const {auth ,setAuth } =dd
+    const {auth ,setAuth ,logout } =dd
     const LogOut =()=>{
   setAuth({user:false , authtoken:null})
   console.log(auth.user)
 }
-    return <nav className="bg-red-500 text-white">
+    return <nav className="bg-red-500 text-white fixed w-[100vw] z-[50]  top-0 left-0 right-0">
        <div className="navbar ">
   <div className="flex-1">
-    <Link href={'/'} className="btn btn-ghost normal-case text-xl">Schologamma Admin Pannel</Link>
+    <Link href={'/'} className="px-2 py-[2px] normal-case text-md font-semibold ">S Admin Pannel</Link>
   </div>
   <div className="flex-none">
     <ul className="menu menu-horizontal px-1">
@@ -38,7 +38,7 @@ const Nav =()=>{
           </ul>
         </details>
       </li>
-      <button className="btn btn-error  text-white rounded-lg shadow-lg cursor-pointer" onClick={()=>LogOut()}>LogOut</button>
+      <button className="px-[6px] py-[2px]  text-white rounded-lg shadow-lg cursor-pointer hover:bg-red-600" onClick={()=>LogOut()}>logout</button>
       </>
       }
     </ul>

@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
 import {
+  Alert,
   Nav } from '@/components'
 const inter = Inter({ subsets: ['latin'] })
 import DataState from '@/context/data/DataDState'
@@ -18,9 +19,16 @@ export default function RootLayout({ children }) {
         <DataState>
 
       <Nav />
-        <div className='mx-[8px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] max-lg:mx-[128px] '>
+      {/* <div className='relative  '>
+      <Alert  />
+
+      </div> */}
+        <div className='mx-[8px] sm:mx-[16px] md:mx-[32px] lg:mx-[64px] max-lg:mx-[128px] mt-[100px] relative '>
+      <Alert />
+      <div>
 
         {children}
+        </div>
 
           </div>
           </DataState>

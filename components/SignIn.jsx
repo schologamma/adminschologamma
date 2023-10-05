@@ -1,12 +1,19 @@
 "use client";
-import React, { useState } from 'react'
+import React, { useState ,useContext} from 'react'
+// import {useRouter} from ''
+import { useRouter } from 'next/navigation';
 import { CommButton, FormInput1, Title } from '.'
+import checkEmptyInput from '@/utils/checkEmptyInput';
+import { isValidEmail ,isValidUsername ,isValidPassword} from '@/utils/check';
+import DataContext from '@/context/data/DataContext';
 function SignIn() {
 
+  const router = useRouter() 
+  const dd = useContext(DataContext)
   const [userData ,setUserData] =useState({
    email:"",
     username:"",
-    dropdown:"",
+    type:"",
     password :"",
     
   })
@@ -35,9 +42,9 @@ setUserData({...userData , [e.target.name]:e.target.value})
 
   },
   {
-    name:"dropdown" ,
+    name:"type" ,
     type:"dropdown",
-    value:userData.dropdown ,
+    value:userData.type ,
     dropDown:["Admin" , "Committee" , "Developer"],
 
     placeholder:"Select your role",
@@ -57,7 +64,28 @@ setUserData({...userData , [e.target.name]:e.target.value})
 
   const handdleSubmit =async (e) =>{
     e.preventDefault() ;
-    
+    const inp = checkEmptyInput(userData);
+    if(inp.length >0){
+      return dd.setAlertFunc("error" ,("Please Fill "+inp[0]+" field"))
+    }
+
+    if (!isValidEmail(userData.email) ){
+      return dd.setAlertFunc("error" ,("Invalid Email !"))
+
+    }
+    if (!isValidUsername(userData.username) ){
+      return dd.setAlertFunc("error" ,("Invalid username. Must be 8-20 alphanumeric characters and unique."))
+
+    }
+    if (!isValidPassword(userData.password) ){
+      return dd.setAlertFunc("error" ,("Password must be ≥ 8 chars with 1 uppercase, 1 lowercase, 1 digit, and 1 special character."))
+
+    }
+    // isValidPassword
+    // check email and username before submit 
+  //  console.log()
+  //  return 0
+    //  userData.email
     setIsSubmitting(true)
     try{
       const res = await fetch('/api/user/',{
@@ -66,9 +94,24 @@ setUserData({...userData , [e.target.name]:e.target.value})
       }) ;
       const data = await res.json()
       console.log(data)
-      setIsSubmitting(false)
 
-      console.log("Success")
+      if( data.ok ===true )
+      { dd.setAuth({
+       user:true,
+       authtoken:data.token
+      }) 
+      
+      dd.auth && router.push('/')
+    }
+    setIsSubmitting(false)
+// for giving the error oin mongoose
+    if(data?.error){
+    return dd.setAlertFunc(data.type , data.error)
+      
+    }
+      console.log(data.error)
+    dd.setAlertFunc(data.type , data.msg)
+
   }
   catch(e){
 

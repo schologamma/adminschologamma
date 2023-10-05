@@ -4,12 +4,14 @@ import { CommButton, FormInput1, Title } from '.'
 import { useContext } from 'react';
 import DataContext from '@/context/data/DataContext';
 import { useRouter } from 'next/navigation';
+import checkEmptyInput from '@/utils/checkEmptyInput';
 function Login() {
+  const dd = useContext(DataContext)
 
   const [userData ,setUserData] =useState({
     username:"",
     password :"",
-    dropdown:""
+    type:""
     
   })
 
@@ -35,7 +37,7 @@ setUserData({...userData , [e.target.name]:e.target.value})
     type:"dropdown",
     placeholder:"Enter your username",
 dropDown:["Admin" , "Committee" , "Developer"],
-    value:userData.dropdown ,
+    value:userData.type ,
     onChangeFunc:handdleOnChangeFunc
 
   },
@@ -50,13 +52,22 @@ dropDown:["Admin" , "Committee" , "Developer"],
   }
 
   ]
+
   // use router 
   const router = useRouter();
   // conetext api
-  const dd = useContext(DataContext)
 
  const handdleSubmit =async(e)=>{
   e.preventDefault() ;
+  const inp =   checkEmptyInput(userData)
+if( inp.length > 0){
+  
+  console.log(userData.dropdown)
+  return dd.setAlertFunc("error" ,( "Plese fill "+inp?.[0] +" field"))
+
+
+
+}
 
   setIsSubmitting(true)
     try{
@@ -70,6 +81,10 @@ dropDown:["Admin" , "Committee" , "Developer"],
 
 
         setIsSubmitting(false)
+// dd.setAlert(type=data.type ,type=data.msg)
+
+console.log(dd.alert)
+      // dd.setAlertFunc(data.type , data.msg); //for set the salert in web
         if( data.ok ===true )
         { dd.setAuth({
          user:true,
@@ -77,12 +92,14 @@ dropDown:["Admin" , "Committee" , "Developer"],
         }) 
         dd.auth && router.push('/')
       }
-        // console.log("Success")
+      dd.setAlertFunc(data.type , data.msg)
+        // console.log("I call set alert function")
     }
     catch(e){
 
     }
  }
+
 
  
 

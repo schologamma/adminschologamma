@@ -11,12 +11,14 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.2",
     "bcrypt": "^5.1.1",
+    "cloudinary": "^1.41.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^7.5.3",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "react-icons": "^4.11.0"
+    "react-icons": "^4.11.0",
+    "validator": "^13.11.0"
   },
   "devDependencies": {
     "autoprefixer": "latest",

@@ -9,7 +9,7 @@ const CommitteeSchema = new Schema({
     email:{
         type:String ,
       
-        unique:[true , 'Email already exists'],
+        // unique:[true , 'Email already exists'],
         required:[true , 'Email is Required !']
     },
     description:{
@@ -40,6 +40,6 @@ const CommitteeSchema = new Schema({
 
 });
 
-const Committee = models.Committee || model( "User" ,CommitteeSchema);
+const Committee = models.Committee || model( "Committee" ,CommitteeSchema);
 
 export default Committee ;
