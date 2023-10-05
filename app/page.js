@@ -11,6 +11,10 @@ import { useRouter } from 'next/navigation';
 // import RawLog
 // import { useSession } from '@/context/session/SessionContext'
 export default function Home() {
+
+  const router = useRouter()
+  const dd = useContext(DataContext) ;
+ 
   useEffect(() => {
     if(dd.auth.user ===false){
       return router.push('/join/login')
@@ -19,9 +23,7 @@ export default function Home() {
    
   }, [dd.auth])
   
-  const router = useRouter()
-  const dd = useContext(DataContext) ;
- 
+
   // const { state, dispatch } = useSession();
   return (
     <main className="" >
