@@ -28,15 +28,7 @@ const Nav =()=>{
       :
       <>
       <li>
-        <details>
-          <summary>
-            Profile
-          </summary>
-          <ul className="p-2 bg-base-100">
-            <li><a>Link 1</a></li>
-            <li><a>Link 2</a></li>
-          </ul>
-        </details>
+        profile
       </li>
       <button className="px-[6px] py-[2px]  text-white rounded-lg shadow-lg cursor-pointer hover:bg-red-600" onClick={()=>LogOut()}>logout</button>
       </>

@@ -1,44 +1,69 @@
 'use client'
-import { Title } from '@/components'
+import { Modal, Title, UpdateCard } from '@/components'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-const TeamCardProfile = ()=>{
+import { useEffect, useState } from 'react'
+
+
+const TeamCardProfile = (    {name,
+BT_ID,
+DOB,
+position,
+type,
+linkedinUrl,
+facebookUrl,
+instragramUrl,
+currentYear,
+photoUrl ,
+description,
+skill,
+cgpa,
+hobby ,
+year ,
+setIsUpdate,
+handleUpdateBtn,
+_id
+
+})=>{
+
+
 
   return (
     <div className="   md:w-[600px]  m-2 p-4 rounded-t-full md:rounded-tr-none  md:rounded-l-full relative shadow-xl">
       <div className="bg-slate-400  opacity-10  absolute top-0 left-0 right-0 bottom-0 z-[-1] rounded-t-full md:rounded-tr-none  md:rounded-l-full"></div>
     <div className="flex flex-col md:flex-row  ">
 <div className="flex flex-row justify-center items-center w-[170px] ">
-  <Image src={'/'} width={200} height={200} alt='name' className='w-[170px] h-[160px] bg-slate-600 rounded-full'/>
+  <Image src={photoUrl} width={200} height={200} alt='name' className='w-[170px] h-[160px] bg-slate-600 rounded-full'/>
 </div>
 <div className="grid grid-cols-1 md:grid-cols-2  mx-[8px] w-full ">
 <p>Name</p> 
-<p>Harish Hedua</p> 
+<p>{name}</p> 
 
 <p>Position</p> 
-<p>HEad</p> 
+<p>{position}</p> 
 
 <p>Year :</p> 
-<p>2022</p>
+<p>{currentYear}</p>
 
 <p>Short Description:</p> 
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima tempore quis dignissimos laborum aperiam enim ab, exercitati.</p> 
+<p>{description}</p> 
 
 <p>skill:</p> 
-<p>c++</p>
+<p>{skill}</p>
 
 </div>
 
 
 </div>
 <div className="flex justify-end space-x-1">
-  <Link href={'/teamscard/teamcarddetail/2313213'}>
+  <Link href={{ pathname: `/teamscard/teamcarddetail/${BT_ID}`, query: { year:year } }}>
   <button className='border-blue-400  text-blue-400 border-2  hover:text-gray-600 hover:bg-blue-400 py-1 px-2 rounded-lg '>View</button>
 
   </Link>
-  <Link href={'/teamscard/editcard/2313213'}  >
-  <button className='border-green-400  border-2 text-green-400 hover:text-gray-600 hover:bg-green-400 py-1 px-2 rounded-lg '>Edit</button> </Link>
+  {/* <Link href={'/teamscard/editcard/2313213'}  > */}
+  <button className='border-green-400  border-2 text-green-400 hover:text-gray-600 hover:bg-green-400 py-1 px-2 rounded-lg ' onClick={(e)=>handleUpdateBtn(e ,_id)}>Edit</button>
+   {/* </Link> */}
   <button className='border-red-400  border-2 text-red-400 hover:text-gray-600  hover:bg-red-400 py-1 px-2 rounded-lg '>Delete</button>
 </div>
 
@@ -64,23 +89,69 @@ const Addbtn = ()=>{
 }
 
 export default function Teamcard({params}) {
+  const [allDataCard ,setAllDataCard] = useState([])
   // const router = useRouter({params})
+  const [isUpdate ,setIsUpdate] =useState(false)
+  useEffect(() => {
+  
+    if( allDataCard.length===0) {
+   const fetchData = async()=>{
+    const res = await fetch(`/api/teams/${params.year}`)
+    const data = await res.json()
+
+    console.log("ima fetch inital data")
+    console.log(data)
+    data.ok && setAllDataCard(data.data)
+  
+   }
+     fetchData()
+   
+     console.log("im fetch from database")
+     console.log()
+    
+   }}, [])
+
+   const [datacard , setDatacard] =useState({})
+  //  if(allDataCard.length >0){
+  //   console.log("hell")
+  //  }
+  const handleUpdateBtn = (e,_id) =>{
+    e.preventDefault()
+
+    // find the data according to mthe id 
+   const dataperson=  allDataCard.find((item)=>item._id===_id)
+
+   setDatacard(dataperson)
+   console.log(dataperson)
+    console.log("hie ")
+  setIsUpdate(true)
+  }
+  
   return(
     <div className="">
       <div className="text-center"><Title name={"ScholoGamma 2023 Teams"} /></div>
       <Link href={'/displayteam'} className="btn bg-blue-300">View page</Link>
       
 {/* For Add the button */}
-<Link href={'/teamscard/addcard'} className={"flex justify-center items-center"} >
+<Link href={`/teamscard/addcard/${params.year}`} className={"flex justify-center items-center"} >
 <Addbtn />
 
 </Link>
+{/* for update card */}
+<Modal isOpen={isUpdate} onClose={()=>setIsUpdate(false)}>
+<UpdateCard datacard={datacard} setIsupdate={setIsUpdate}    />
 
+</Modal>
   
   <div className='flex flex-row flex-wrap justify-center items-center'>
-    
-<TeamCardProfile />
-<TeamCardProfile />
+    {
+      allDataCard?.map((item , index)=>(
+<TeamCardProfile {...item} key={item._id}  year={params.year} setIsUpdate={setIsUpdate} handleUpdateBtn={handleUpdateBtn} />
+
+      ))
+
+    }
+
 </div>
   </div>)
 }

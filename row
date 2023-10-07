@@ -42,3 +42,22 @@ teams profile database :-->
 
 
 }
+
+
+{
+  
+  "BT_ID": "dasdsa",
+"DOB": "2023-10-13",
+"cgpa":"sdsads",
+"currentYear": "4",
+"description": "dsadas",
+"facebookUrl": "sadsad",
+"hobby": "sadad",
+"instragramUrl": "sadsad",
+"linkedinUrl": "dsadsa",
+"name": "dsadas",
+"photoUrl": "2.png",
+"position": "Treasurer",
+"skill": "asdsad",
+"type" :"652013ecb582019f274ccd45"
+}

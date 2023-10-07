@@ -10,7 +10,7 @@ import DataContext from '@/context/data/DataContext';
 
 const YearCard = ({year})=>{
     return (
-        <Link href={`/teamscard/${year}`} className="text-[44px] font-extrabold drop-shadow-2xl text-orange-400  w-[150px] h-[150px] rounded-lg shadow-lg flex flex-wrap  justify-center items-center relative  cursor-pointer">
+        <Link href={'/teamscard/2022'} className="text-[44px] font-extrabold drop-shadow-2xl text-orange-400  w-[150px] h-[150px] rounded-lg shadow-lg flex flex-wrap  justify-center items-center relative  cursor-pointer">
             <div className="bg-blue-300 opacity-10  absolute top-0 left-0 right-0 bottom-0 z-[-1] backdrop-blur-md  rounded-lg"></div>
             {year} </Link>
     )
@@ -25,8 +25,8 @@ const YearCard = ({year})=>{
 
 const Teams =()=>{
   const dd = useContext(DataContext)
+  const [yearList , setYearList] =useState([])
 
-const [yearList , setYearList] = useState([])
 
 const OnSubmitYear = async(e) =>{
   e.preventDefault() ;
@@ -56,31 +56,25 @@ const res =await fetch(`/api/teams/${year}`,{
 })
 
 const data = await res.json()
-console.log(data)
-if(data.ok ===true ){
-  setYearList((pre)=>([...pre , {year:data?.data.year, _id:data?.data._id }]))
 
-}
-return dd.setAlertFunc(data.type , data.msg)
+return setAlertFunc(data.type , data.msg)
 }
 
 
-// for fetching the data at start
-useEffect(() => {
+useEffect(async() => {
   
-  if( yearList.length===0) {
- const fetchData = async()=>{
+ if( yearList.length===0) {
+
   const res = await fetch('/api/teams')
   const data = await res.json()
-  data.ok && setYearList(data.data)
 
- }
-   fetchData()
+  data.ok && setYearList(data.data)
+  console.log("im fetch from database")
+  // console.log(data)
  
-   console.log("im fetch from database")
-   console.log()
-  
- }}, [])
+}
+  return 0 
+}, [])
 
     return <div>
         <div className="flex justify-center mt-3">
@@ -98,8 +92,8 @@ useEffect(() => {
     <div className=" flex flex-row flex-wrap  space-x-2">
 
         {
-    yearList?.map((item ,index) =>(
-        <YearCard key={index["year"]} year={item["year"]} />
+    teamsData.map((item ,index) =>(
+        <YearCard key={index} year={item.year} />
     ))
 
 

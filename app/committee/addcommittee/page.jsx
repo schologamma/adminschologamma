@@ -153,7 +153,10 @@ const imgUrl =await uploadImage(committeeData.photo)
 
 imgUrl?.result && setCommitteeData(pre=>({...pre , photo:imgUrl.result.secure_url}))
 console.log(imgUrl?.result.secure_url)
+if(!imgUrl.result){
 
+ return  dd.setAlertFunc('error' ,"Server Error")
+}
 // connect with databse here :
 
 const res = await fetch('/api/committee/add' , {

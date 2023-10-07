@@ -34,14 +34,37 @@ const EventSchema = {
         required:[true , 'user is Required !']
 
     },
-    username:{
+    edate:{
         type:String ,
         unique:[true , 'username already exists'],
         required:[true , 'user is Required !']
 
     },
+    venue:{
+        type:String ,
+        required:[true , 'venue is Required !']
+
+    },
+    poster:{
+        type:String ,
+        required:[true , 'user is Required !']
+
+    },
+    description:{
+        type:String ,
+        required:[true , 'user is Required !']
+
+    },
+ 
+    joinLink:{
+        type:String ,
+        required:[true , 'user is Required !']
+
+    },
+
 
 }
+
 
 const Events = models.Events || model( "Events" ,EventSchema);
 

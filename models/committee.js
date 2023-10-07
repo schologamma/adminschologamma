@@ -27,7 +27,7 @@ const CommitteeSchema = new Schema({
 
     username:{
         type:String ,
-        unique:[true , 'username already exists'],
+        // unique:[true , 'username already exists'],
         required:[true , 'user is Required !']
 
     },

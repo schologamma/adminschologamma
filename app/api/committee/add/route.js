@@ -7,13 +7,7 @@ export const POST = async(req)=>{
     const data= await req.json();
     const {name  ,password ,username} =data
     delete data.cpassword ;  //for delete the conform password preopery
-    // name:"",
-    // email:"",
-    // description:"",
-    // password:"",
-    // cpassword:"",
-    // username:"",
-    // photo:null
+    
 // for bcrypit
 const saltRounds = 10;
 const text_password = password;
@@ -23,9 +17,16 @@ const haspass =await bcrypt.hash(text_password, saltRounds)
 try {
     await connectToDB() ;
     console.log("Database connected Sucesssully")
-const check = await Committee.findOne({username ,name })
+const check = await Committee.findOne({username:username })
 if(check){
-    return new Response(JSON.stringify({msg:"This username  or committee already exsit !" , ok:true ,type:"warning"}) , {status:200})
+    return new Response(JSON.stringify({msg:"This username   already exsit !" , ok:true ,type:"warning"}) , {status:200})
+
+
+}
+
+const check1 = await Committee.findOne({name:name })
+if(check1){
+    return new Response(JSON.stringify({msg:"This name  or committee already exsit !" , ok:true ,type:"warning"}) , {status:200})
 
 
 }

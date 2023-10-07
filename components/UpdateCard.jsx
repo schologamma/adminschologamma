@@ -1,12 +1,21 @@
 "use client" ;
 import { FormInput1, Title ,CommButton } from '@/components'
 
-import { ForumPostList ,committeeList } from '@/constants';
+import { ForumPostList  } from '@/constants';
 
-import React, { useState } from 'react'
+import React, { useContext,useEffect, useState } from 'react'
+import { uploadImage } from '@/utils/ulpoadImage';
 
+import checkEmptyInput from '@/utils/checkEmptyInput'
 
-function AddCard() {
+// for import context
+import DataContext from '@/context/data/DataContext'
+import { getIdByName } from '@/utils/getIdByname';
+import { data } from 'autoprefixer';
+function UpdateCard ({datacard ,setIsupdate ,params}) {
+    const dd = useContext(DataContext)
+    const [committeeList,setCommitteeList] = useState([])
+
 
 // create the hook for storing the data
 const[profileData ,setProfileData] = useState({
@@ -19,7 +28,7 @@ const[profileData ,setProfileData] = useState({
     facebookUrl:"",
     instragramUrl:"",
     currentYear:"",
-    photoUrl:"",
+    photoUrl:null,
     description:"",
     skill:"",
     cgpa:"",
@@ -27,9 +36,31 @@ const[profileData ,setProfileData] = useState({
 
 
 })
-
+useEffect(() =>  {
+  
+    datacard !==null && setProfileData(datacard)
+    if( committeeList.length===0) {
+   const fetchData = async()=>{
+    const res = await fetch('/api/committee')
+    const data = await res.json()
+    data.ok && setCommitteeList(data.data)
+  
+   }
+     fetchData()
+   
+     console.log("im fetch from database")
+     console.log()
+    
+   }}, [])
 const handdleOnChangeFunc =(e)=>{
 setProfileData({...profileData , [e.target.name]:e.target.value})
+}
+
+const handleImageState =(name  , value)=>{
+    console.log(value , name)
+    setProfileData((pre) => ({...pre , photoUrl:value}))
+
+
 }
 // profile vard form 
 const  profilecardDetailForm = [
@@ -80,7 +111,7 @@ const  profilecardDetailForm = [
 
     value :profileData.type, //ex: techspot committee  /Admin
     type:"dropdown",
-    dropDown:committeeList,
+    dropDown:["Select your Committee" ,...committeeList.map(item => item.name)],
     onChangeFunc:handdleOnChangeFunc
 
     
@@ -173,15 +204,78 @@ const  profilecardDetailForm = [
 
     value :profileData.photoUrl , //ex: member /Head / Co-Head /Admin
     type:"file",
-    onChangeFunc:handdleOnChangeFunc
+    onChangeFunc:handleImageState
     
 },
 
 ] ;
 
+const [isSubmitting ,setIsSubmitting] = useState(false)
+
+
+
+const handleSubmit =async (e)=>{
+    e.preventDefault() ;
+    const inp = checkEmptyInput(profileData);
+    if(inp.length >0){
+      return dd.setAlertFunc("error" ,("Please Fill "+inp[0]+" field"))
+    }
+
+    const committeeId = getIdByName( profileData.type,committeeList)
+if(!committeeId){
+    return dd.setAlertFunc("error" ,("Please select committee First "))
+
+}
+setProfileData(pre=>({...pre , type:committeeId}))
+    
+    setIsSubmitting(true)
+// first : upload the image in cloudanry
+
+// if(committeeData.photo !=null) {
+const imgUrl =await uploadImage(profileData.photoUrl)
+
+ setProfileData(pre=>({...pre , photoUrl:imgUrl.result.secure_url}))
+console.log(imgUrl?.result.secure_url)
+if(!imgUrl.result){
+
+return  dd.setAlertFunc('error' ,"Server Error")
+}
+console.log(profileData)
+
+// connect with databse here :
+console.log(imgUrl.result.secure_url)
+
+const res = await fetch(`/api/teams/${params.year}` , {
+method:"PUT",
+body:JSON.stringify({...profileData , photoUrl:imgUrl.result.secure_url , type:committeeId})
+
+});
+console.log(profileData)
+const data = await res.json() ;
+setIsSubmitting(false)
+
+// dd.setAlertFunc(data.type ,data.msg)
+
+console.log(data)
+
+
+
+
+// }
+
+
+
+
+}
+
+
+const handleSubmitUpdate = (e)=>{
+e.preventDefault()
+console.log(ok)
+}
     return (
-    <div>
-   <Title name={"Add Team Participants : "} classes={"text-center"} />
+    <div classeName="">
+   <Title name={"Edit Team Participants : "} classes={"text-center"} />
    <div className="flex flex-col justify-center items-center ">
     {
         profilecardDetailForm.map((item ,idex)=>(
@@ -189,11 +283,11 @@ const  profilecardDetailForm = [
         ))
     }
 
-    <CommButton title={"ADD"} handdleSubmite={()=>{console.log(profilecardDetailForm)}} key={"hgjg"} />
+    <CommButton title={"ADD"} handdleSubmite={handleSubmitUpdate} key={"hgjg"} isSubmitting={isSubmitting}  />
    </div>
 
     </div>
   )
 }
 
-export default AddCard
+export default UpdateCard 

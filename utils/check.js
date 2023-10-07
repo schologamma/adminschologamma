@@ -53,3 +53,14 @@ export function isValidPassword(password) {
 
   return true;
 }
+
+
+// is valid year function
+export function isValidYear(yearString) {
+  // Use regular expression to check if the string consists of 4 digits
+  const yearPattern = /^\d{4}$/;
+
+  // Check if the string matches the pattern and if the year is within a reasonable range (e.g., 1000 to 9999)
+  const year = parseInt(yearString, 10);
+  return yearPattern.test(yearString) && year >= 1000 && year <= 9999;
+}

@@ -5,9 +5,10 @@ import {GrFacebookOption} from 'react-icons/gr'
 import {BiLogoLinkedin} from 'react-icons/bi'
 import {IoLogoInstagram} from 'react-icons/io'
 import Link from 'next/link'
-function ProfileCardDetail() {
+function ProfileCardDetail({isFetching}) {
   return (
-    <div>
+    <div className=''>
+
      <div className="">
       <div className="">
         <Title name="Schologamma Forum" classes={"text-center"}   ></Title>
@@ -15,8 +16,10 @@ function ProfileCardDetail() {
         <h3 className="text-[16px] font-semibold text-gray-400  text-center">Member</h3>
       </div>
       {/* profile photo and info */}
-      <div className="flex justify-center items-center">
-        <div className="mt-[70px] shadow-2xl">
+      <div className="flex justify-center items-center ">
+  
+        <div className="mt-[70px] shadow-2xl relative">
+        <div className={` ${isFetching?'block':'hidden'} rounded-tl-[200px] w-[100%] h-[100%] rounded-br-full absolute top-0 left-0 right-0 bottom-0 z-[2] bg-red-400 `}></div>
       <div className="w-[800px] h-auto bg-white rounded-tl-full  relative flex  justify-center  ">
 <div className="w-[350px] h-[350px] rounded-full goldencss relative shadow-inner ">
 <div className="w-[300px] h-[300px] rounded-full bg-slate-500 absolute top-[15px] left-[20px] shadow-xl "></div>

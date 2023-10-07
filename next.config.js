@@ -5,12 +5,22 @@ const nextConfig = {
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'drive.google.com',
+            hostname: 'drive.google.com' ,
+           
+           
+          },
+          {
+            protocol: 'https',
+            hostname: 'res.cloudinary.com' ,
            
            
           },
         ],
-      },
+      }
+        // images: {
+        //   domains: ['res.cloudinary.com' ,'drive.google.com'],
+        // },
+      // },
 }
 
 module.exports = nextConfig

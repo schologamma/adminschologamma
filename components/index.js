@@ -9,8 +9,10 @@ import FormInput from "./FormInput";
 import CommButton from "./CommButton";
 import EventCard from "./EventCard";
 import SignIn from "./SignIn";
-import Model from "./Model";
+import Modal from "./Modal";
 import Alert from "./Alert";
+import UpdateCard from "./UpdateCard";
+
 export  {
     Teams ,
     Nav,
@@ -22,7 +24,9 @@ FormInput ,
 CommButton,
 EventCard,
 SignIn,
-Model,
+Modal
+,
+UpdateCard,
 Alert
 
 

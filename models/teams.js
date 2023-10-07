@@ -14,7 +14,11 @@ import  {Schema ,model , models} from "mongoose";
 // :"",
 // :""
 const TeamsSchama = new Schema({
-    name:{
+year:{
+    type:String , 
+    required :true
+},
+   data:[ {name:{
         type:String ,
         ref:'User',//one to many relationship
     },
@@ -30,8 +34,8 @@ const TeamsSchama = new Schema({
         required:[true , "Tag is required"]
     }, 
     type:{
-        type:String,
-        required:[true , "Tag is required"]
+        type:Schema.Types.ObjectId ,
+        ref:'Committee',//one to many relationship
     },
     linkedinUrl:{
         type:String,
@@ -70,10 +74,10 @@ cgpa:{
 hobby:{
     type:String,
     required:[true , "Tag is required"]
-}
+}}]
 
 });
 
-const Teams =  models.Prompt || model('Teams' ,TeamsSchama)
+const Teams =  models.Teams || model('Teams' ,TeamsSchama)
 
 export default Teams ;
