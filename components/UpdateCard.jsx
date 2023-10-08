@@ -11,12 +11,12 @@ import checkEmptyInput from '@/utils/checkEmptyInput'
 // for import context
 import DataContext from '@/context/data/DataContext'
 import { getIdByName } from '@/utils/getIdByname';
-import { data } from 'autoprefixer';
-function UpdateCard ({datacard ,setIsupdate ,params}) {
+// import { data } from 'autoprefixer';
+function UpdateCard ({datacard ,setIsupdate ,year ,setAllDataCard ,allDataCard }) {
     const dd = useContext(DataContext)
     const [committeeList,setCommitteeList] = useState([])
 
-
+const [isImageChange,setIsImageChange] =useState(false)
 // create the hook for storing the data
 const[profileData ,setProfileData] = useState({
     name:"",
@@ -36,9 +36,10 @@ const[profileData ,setProfileData] = useState({
 
 
 })
+
 useEffect(() =>  {
+datacard !==null && profileData.name ==="" && setProfileData(datacard)
   
-    datacard !==null && setProfileData(datacard)
     if( committeeList.length===0) {
    const fetchData = async()=>{
     const res = await fetch('/api/committee')
@@ -46,7 +47,8 @@ useEffect(() =>  {
     data.ok && setCommitteeList(data.data)
   
    }
-     fetchData()
+
+ fetchData()
    
      console.log("im fetch from database")
      console.log()
@@ -54,6 +56,13 @@ useEffect(() =>  {
    }}, [])
 const handdleOnChangeFunc =(e)=>{
 setProfileData({...profileData , [e.target.name]:e.target.value})
+}
+
+const handleOnChangeImage = (name , data)=>{
+    setProfileData(pre =>({...pre , [name]:data}))
+setIsImageChange(true)
+
+
 }
 
 const handleImageState =(name  , value)=>{
@@ -73,16 +82,16 @@ const  profilecardDetailForm = [
 
         
     }
-,
-{
-    name:"BT_ID" ,
-    placeholder :"Enter your BTech-ID" ,
-    value :profileData.BT_ID ,
-    type:"text",
-    onChangeFunc:handdleOnChangeFunc
+// ,
+// {
+//     name:"BT_ID" ,
+//     placeholder :"Enter your BTech-ID" ,
+//     value :profileData.BT_ID ,
+//     type:"text",
+//     onChangeFunc:handdleOnChangeFunc
 
     
-}
+// }
 ,
 {
     name:"DOB" ,
@@ -93,29 +102,29 @@ const  profilecardDetailForm = [
 
     
 }
-,
-{
-    name:"position" ,
-    placeholder :"Enter your role in Forum" ,
-    value :profileData.position , //ex: member /Head / Co-Head /presisdent
-    type:"dropdown",
-    dropDown:ForumPostList,
-    onChangeFunc:handdleOnChangeFunc
+// ,
+// {
+//     name:"position" ,
+//     placeholder :"Enter your role in Forum" ,
+//     value :profileData.position , //ex: member /Head / Co-Head /presisdent
+//     type:"dropdown",
+//     dropDown:ForumPostList,
+//     onChangeFunc:handdleOnChangeFunc
 
     
-}
-,
-{
-    name:"type" ,
-    placeholder :"Enter your Committee or Admin" ,
+// }
+// ,
+// {
+//     name:"type" ,
+//     placeholder :"Enter your Committee or Admin" ,
 
-    value :profileData.type, //ex: techspot committee  /Admin
-    type:"dropdown",
-    dropDown:["Select your Committee" ,...committeeList.map(item => item.name)],
-    onChangeFunc:handdleOnChangeFunc
+//     value :profileData.type, //ex: techspot committee  /Admin
+//     type:"dropdown",
+//     dropDown:["Select your Committee" ,...committeeList.map(item => item.name)],
+//     onChangeFunc:handdleOnChangeFunc
 
     
-}
+// }
 ,
 {
     name:"linkedinUrl" ,
@@ -200,11 +209,11 @@ const  profilecardDetailForm = [
 ,
 {
     name:"photoUrl" ,
-    placeholder :"upload the image here :" ,
+    placeholder :"upload your updated the image here :" ,
 
     value :profileData.photoUrl , //ex: member /Head / Co-Head /Admin
     type:"file",
-    onChangeFunc:handleImageState
+    onChangeFunc:handleOnChangeImage
     
 },
 
@@ -214,49 +223,76 @@ const [isSubmitting ,setIsSubmitting] = useState(false)
 
 
 
-const handleSubmit =async (e)=>{
+const handleSubmitUpdate =async (e)=>{
     e.preventDefault() ;
+console.log(profileData)
+
+    console.log("hello update page")
     const inp = checkEmptyInput(profileData);
     if(inp.length >0){
       return dd.setAlertFunc("error" ,("Please Fill "+inp[0]+" field"))
     }
 
-    const committeeId = getIdByName( profileData.type,committeeList)
-if(!committeeId){
-    return dd.setAlertFunc("error" ,("Please select committee First "))
+    // const committeeId = getIdByName( profileData.type,committeeList)
+// if(!committeeId){
+//     return dd.setAlertFunc("error" ,("Please select committee First "))
 
-}
-setProfileData(pre=>({...pre , type:committeeId}))
+// }
+// setProfileData(pre=>({...pre , type:committeeId}))
     
     setIsSubmitting(true)
-// first : upload the image in cloudanry
-
-// if(committeeData.photo !=null) {
-const imgUrl =await uploadImage(profileData.photoUrl)
-
- setProfileData(pre=>({...pre , photoUrl:imgUrl.result.secure_url}))
-console.log(imgUrl?.result.secure_url)
-if(!imgUrl.result){
-
-return  dd.setAlertFunc('error' ,"Server Error")
-}
 console.log(profileData)
 
-// connect with databse here :
-console.log(imgUrl.result.secure_url)
+if(isImageChange){
+    const imgUrl =await uploadImage(profileData.photoUrl)
 
-const res = await fetch(`/api/teams/${params.year}` , {
+    setProfileData(pre=>({...pre , photoUrl:imgUrl.result.secure_url}))
+   console.log(imgUrl?.result.secure_url)
+   if(!imgUrl.result){
+        setIsSubmitting(false)
+
+   return  dd.setAlertFunc('error' ,"Server Error")
+   }
+   const res = await fetch(`/api/teams/teamperson/${year}` , {
+    method:"PUT",
+    body:JSON.stringify({...profileData ,photoUrl:imgUrl.result.secure_url  })
+    
+    });
+    console.log(profileData)
+    const data = await res.json() ;
+    const ds = data.data
+    
+    const filt =allDataCard.filter(item =>item.BT_ID !== profileData.BT_ID)
+    
+    data.ok && setAllDataCard((pre)=>([...filt, {...profileData ,photoUrl:imgUrl.result.secure_url}]))
+    
+    setIsSubmitting(false)
+    
+    setIsupdate(false)
+   return dd.setAlertFunc(data.type ,data.msg)
+
+}
+
+
+const res = await fetch(`/api/teams/teamperson/${year}` , {
 method:"PUT",
-body:JSON.stringify({...profileData , photoUrl:imgUrl.result.secure_url , type:committeeId})
+body:JSON.stringify({...profileData  })
 
 });
 console.log(profileData)
 const data = await res.json() ;
+const ds = data.data
+
+const filt =allDataCard.filter(item =>item.BT_ID !== profileData.BT_ID)
+
+data.ok && setAllDataCard((pre)=>([...filt, profileData]))
+
 setIsSubmitting(false)
 
-// dd.setAlertFunc(data.type ,data.msg)
-
+setIsupdate(false)
 console.log(data)
+
+return dd.setAlertFunc(data.type ,data.msg)
 
 
 
@@ -269,10 +305,7 @@ console.log(data)
 }
 
 
-const handleSubmitUpdate = (e)=>{
-e.preventDefault()
-console.log(ok)
-}
+
     return (
     <div classeName="">
    <Title name={"Edit Team Participants : "} classes={"text-center"} />

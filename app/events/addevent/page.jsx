@@ -1,15 +1,32 @@
 "use client" ;
-import React  , {useContext, useState}from 'react'
+import React  , {useContext, useEffect, useState}from 'react'
 import {CommButton, FormInput ,FormInput1 ,Title} from '@/components'
 import { committeeList } from '@/constants'
 import checkEmptyInput from '@/utils/checkEmptyInput';
 import { isValidEmail ,isValidUsername ,isValidPassword} from '@/utils/check';
 import DataContext from '@/context/data/DataContext';
 import { uploadImage } from '@/utils/ulpoadImage';
+import { getIdByName } from '@/utils/getIdByname';
 
 function AddEvent() {
     const [ isSubmitting  ,setIsSubmitting] =useState(false)
+    const [committeeList , setCommitteeList] =useState([])
 const dd = useContext(DataContext)  ;
+useEffect(() =>  {
+  
+    if( committeeList.length===0) {
+   const fetchData = async()=>{
+    const res = await fetch('/api/committee')
+    const data = await res.json()
+    data.ok && setCommitteeList(data.data)
+  
+   }
+     fetchData()
+   
+     console.log("im fetch from database")
+     console.log()
+    
+   }}, [])
 
     const [dataEvent , setDataEvent] = useState({
         name:"",
@@ -64,7 +81,7 @@ const dd = useContext(DataContext)  ;
 
         value :dataEvent.organizer ,
         type:"dropdown",
-        dropDown :committeeList
+        dropDown :["Select your Committee" ,...committeeList?.map(item => item.name)],
         
     },
     {
@@ -73,7 +90,7 @@ const dd = useContext(DataContext)  ;
         onChangeFunc :handdleEventChange,
 
         value :dataEvent.sdate ,
-        type:"date",
+        type:"datetime-local",
         
     },
     {
@@ -82,7 +99,7 @@ const dd = useContext(DataContext)  ;
         onChangeFunc :handdleEventChange,
     
         value :dataEvent.edate ,
-        type:"date",
+        type:"datetime-local",
         
     }
 ,
@@ -133,6 +150,8 @@ const dd = useContext(DataContext)  ;
 const handleSubmit = async(e)=>{
 
     e.preventDefault() ;
+
+
     console.log(dataEvent)
 
     const inp = checkEmptyInput(dataEvent);
@@ -140,6 +159,13 @@ const handleSubmit = async(e)=>{
       return dd.setAlertFunc("error" ,("Please Fill "+inp[0]+" field"))
     }
 
+    // cnaver the committee into id
+    const committeeId = getIdByName( dataEvent.organizer,committeeList)
+if(committeeId ===null){
+    return dd.setAlertFunc("error" ,("Please  select the oragnizer first!"))
+}
+
+setDataEvent(pre=>({...pre ,organizer:committeeId}))
     setIsSubmitting(true)
     // first : upload the image in cloudanry
     
@@ -156,7 +182,7 @@ const handleSubmit = async(e)=>{
     
     const res = await fetch('/api/events/add' , {
         method:"POST",
-        body:JSON.stringify({...dataEvent , poster:imgUrl.result.secure_url})
+        body:JSON.stringify({...dataEvent , poster:imgUrl.result.secure_url , organizer:committeeId})
     
     });
     const data = await res.json() ;

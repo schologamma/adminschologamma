@@ -1,6 +1,7 @@
 // for fetching the committee list 
 import { connectToDB } from '@/utils/database';
 import  Committee from '@/models/committee';
+// get committee list
 export const GET = async(req)=>{
     // const data= await req.json();
 try {

@@ -221,7 +221,7 @@ const handleSubmit =async (e)=>{
     }
 
     const committeeId = getIdByName( profileData.type,committeeList)
-if(!committeeId){
+if(committeeId===null){
     return dd.setAlertFunc("error" ,("Please select committee First "))
 
 }
@@ -253,7 +253,7 @@ console.log(profileData)
 const data = await res.json() ;
 setIsSubmitting(false)
 
-// dd.setAlertFunc(data.type ,data.msg)
+dd.setAlertFunc(data.type ,data.msg)
 
 console.log(data)
 

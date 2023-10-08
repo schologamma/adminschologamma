@@ -78,8 +78,19 @@ if(!checkOld){
     return new Response(JSON.stringify({ msg:"This bt teams  are not  exist!" , type:"warning" , ok:false}) , {status:200})
 
 }
+// writew the cod eofr thecheck bt id
+
+function findByBTId(data, btId) {
+    return data.find(item =>item.BT_ID === btId)
+}
 
 const dataOld = checkOld.data 
+const findID = findByBTId(dataOld , BT_ID)
+console.log(findID)
+if(findID){
+    return new Response(JSON.stringify({ msg:"This BTID are already  exist!" , type:"warning" , ok:false}) , {status:200})
+
+}
 const dataNew = [...dataOld , data] 
 
 console.log(dataNew)

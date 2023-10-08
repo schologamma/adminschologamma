@@ -18,7 +18,7 @@ const EventSchema = {
     },
     type:{
         type:String ,
-        unique:[true , 'username already exists'],
+        // unique:[true , 'username already exists'],
         required:[true , 'user is Required !']
 
     },
@@ -30,13 +30,13 @@ const EventSchema = {
     },
     sdate:{
         type:String ,
-        unique:[true , 'username already exists'],
+        // unique:[true , 'username already exists'],
         required:[true , 'user is Required !']
 
     },
     edate:{
         type:String ,
-        unique:[true , 'username already exists'],
+        // unique:[true , 'username already exists'],
         required:[true , 'user is Required !']
 
     },

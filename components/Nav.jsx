@@ -13,7 +13,7 @@ const Nav =()=>{
   setAuth({user:false , authtoken:null})
   console.log(auth.user)
 }
-    return <nav className="bg-red-500 text-white fixed w-[100vw] z-[50]  top-0 left-0 right-0">
+    return <nav className="bg-red-500 text-white fixed w-[100vw] z-[29]  top-0 left-0 right-0">
        <div className="navbar ">
   <div className="flex-1">
     <Link href={'/'} className="px-2 py-[2px] normal-case text-md font-semibold ">S Admin Pannel</Link>

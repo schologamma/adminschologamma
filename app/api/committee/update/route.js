@@ -7,6 +7,7 @@ export const POST = async(req)=>{
     const data= await req.json();
     // const {name   ,username  } =data
     delete data.cpassword ;  
+    delete data.password ;  
     const _id = data._id
     delete data._id ;  //for delete the conform password preopery
     
@@ -38,7 +39,7 @@ const committee = await Committee.findOneAndUpdate({_id:_id} , {...data});
 
     // await committee.save() ;
     console.log(committee)
-return new Response(JSON.stringify({msg:" Committee has been updated  SuccessFully ", type:"success" , ok:true}) , {status:200})
+return new Response(JSON.stringify({msg:" Committee has been updated  SuccessFully ", data:committee,  type:"success" , ok:true}) , {status:200})
 
 } catch (error) {
 // console.log(error)

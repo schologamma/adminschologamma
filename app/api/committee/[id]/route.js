@@ -15,7 +15,7 @@ export const GET = async (req, {params})=>{
         const committee = await Committee.findById(params.id).select("-password");
      console.log(committee)
 
-     return       committee ? new Response(JSON.stringify({data:committee, msg:"data fetch by id Successfully" , type:"success" , ok:true}) , {status:200}) :new Response(JSON.stringify({data:committee, msg:"Incorrect id you entered" , type:"success" , ok:true}) , {status:200})
+     return   committee ? new Response(JSON.stringify({data:committee, msg:"data fetch by id Successfully" , type:"success" , ok:true}) , {status:200}) :new Response(JSON.stringify({data:committee, msg:"Incorrect id you entered" , type:"success" , ok:true}) , {status:200})
         
     
      

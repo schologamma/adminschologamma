@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Modal = ({ isOpen, onClose, children }) => {
+const Modal2 = ({ isOpen, onClose, children }) => {
   const modalClasses = isOpen
     ? 'modal-container transform opacity-100 scale-100 transition-transform transition-opacity ease-in duration-300'
     : 'modal-container transform opacity-0 scale-95 transition-transform transition-opacity ease-out duration-300 pointer-events-none';
@@ -22,4 +22,4 @@ X
   );
 };
 
-export default Modal;
+export default Modal2;

@@ -4,23 +4,22 @@ import { FormInput1, Title  ,CommButton} from '@/components';
 // import { } from '@/constants'
 import { useState } from 'react';
 
-function UpdateCommittee({params}) {
+function UpdateCommittee23({params}) {
 
     // implement the use effect hook for fetch the data of perticular committee
     const[committeeData , setCommitteeData] = useState({
         name:"",
         email:"",
         description:"",
-        password:"",
-        cpassword:"",
-        username:"",
         photo:""
 
     });
     const handleOnChange =(e) =>{
         setCommitteeData({...committeeData , [e.target.name]:e.target.value})
         }
-
+const handleOnChangeImage =() =>{
+    
+}
     // committee from struct 
     const  CommitteeForm = [
         {
@@ -49,41 +48,16 @@ function UpdateCommittee({params}) {
 
             
         },
-        {
-            name:"username" ,
-            placeholder:"Enter your UserName" , 
-            value :committeeData.username , //ex: member /Head / Co-Head /Admin
-            type:"text",
-            onChangeFunc:handleOnChange
-
-            
-        },
-        {
-            name:"password" ,
-            placeholder:"Enter your Password :",
-            value :committeeData.password, //ex: member /Head / Co-Head /Admin
-            type:"password",
-            onChangeFunc:handleOnChange
-
-            
-        },
-        {
-            name:"cpassword" ,
-            placeholder:"Confirm your Password :",
     
-            value :committeeData.cpassword , //ex: member /Head / Co-Head /Admin
-            type:"password",
-            onChangeFunc:handleOnChange
 
-            
-        },
+
         {
             name:"photo" ,
             placeholder:"Upload your Committe Logo :",
     
             value :committeeData.photo , 
             type:"file",
-            onChangeFunc:handleOnChange
+            onChangeFunc:handleOnChangeImage
 
         }
     ] ;
@@ -106,4 +80,4 @@ function UpdateCommittee({params}) {
   )
 }
 
-export default UpdateCommittee
+export default UpdateCommittee23

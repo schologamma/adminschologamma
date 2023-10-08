@@ -12,7 +12,10 @@ import SignIn from "./SignIn";
 import Modal from "./Modal";
 import Alert from "./Alert";
 import UpdateCard from "./UpdateCard";
-
+import ModalAlert from "./ModalAlert";
+import UpdateCommittee from "./UpdateComittee";
+import UpdateEvent from "./UpdateEvent";
+import Modal2 from "./Modal2";
 export  {
     Teams ,
     Nav,
@@ -24,10 +27,18 @@ FormInput ,
 CommButton,
 EventCard,
 SignIn,
-Modal
+Modal,
+ModalAlert,
+UpdateEvent
+,
+Modal2
+
+
 ,
 UpdateCard,
-Alert
+Alert,
+UpdateCommittee
+
 
 
 
