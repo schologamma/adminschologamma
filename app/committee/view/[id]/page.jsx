@@ -26,9 +26,9 @@ function ViewCommittee({params}) {
   
       // if( committeeData.length===0) {
      const fetchData = async()=>{
-      const res = await fetch(`/api/committee/${params.id}`)
+      const res = await fetch(`/api/committee/viewId/${params.id}`)
       const data = await res.json()
-      const res1 = await fetch(`/api/events/${params.id}`)
+      const res1 = await fetch(`/api/events/viewid/${params.id}`)
       const data1 = await res1.json()
   
       console.log("ima fetch inital data")

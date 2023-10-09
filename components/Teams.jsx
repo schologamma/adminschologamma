@@ -51,7 +51,7 @@ console.log(year+"ok")
   // alert("ok a1ert")
 
 // Start the fetch the database
-const res =await fetch(`/api/teams/${year}`,{
+const res =await fetch(`/api/teams/viewid/${year}`,{
   method:"POST"
 })
 

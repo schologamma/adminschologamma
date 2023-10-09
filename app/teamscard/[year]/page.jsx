@@ -104,7 +104,7 @@ const dd = useContext(DataContext)
   
     if( allDataCard.length===0) {
    const fetchData = async()=>{
-    const res = await fetch(`/api/teams/${params.year}`)
+    const res = await fetch(`/api/teams/viewid/${params.year}`)
     const data = await res.json()
 
     console.log("ima fetch inital data")
