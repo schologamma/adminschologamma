@@ -7,7 +7,7 @@ function Events() {
 const[eventData,setEventData]=useState([])
   useEffect(() => {
   
-    if( eventData.length===0) {
+    // if( eventData.length===0) {
    const fetchData = async()=>{
     const res = await fetch(`/api/events/`)
     const data = await res.json()
@@ -22,7 +22,7 @@ const[eventData,setEventData]=useState([])
      console.log("im fetch from database")
     //  console.log()
     
-   }
+  //  }
   }, [])
 
   const [isUpdate ,setIsUpdate] = useState(false)

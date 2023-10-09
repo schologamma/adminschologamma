@@ -68,7 +68,7 @@ return dd.setAlertFunc(data.type , data.msg)
 // for fetching the data at start
 useEffect(() => {
   
-  if( yearList.length===0) {
+  // if( yearList.length===0) {
  const fetchData = async()=>{
   const res = await fetch('/api/teams')
   const data = await res.json()
@@ -80,7 +80,8 @@ useEffect(() => {
    console.log("im fetch from database")
    console.log()
   
- }}, [])
+//  }
+}, [])
 
     return <div>
         <div className="flex justify-center mt-3">

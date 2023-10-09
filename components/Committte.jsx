@@ -41,7 +41,7 @@ const Committe =()=>{
     const [committeeData , setCommitteeData] = useState([])
     useEffect(() => {
   
-        if( committeeData.length===0) {
+        // if( committeeData.length===0) {
        const fetchData = async()=>{
         const res = await fetch(`/api/committee`)
         const data = await res.json()
@@ -56,7 +56,9 @@ const Committe =()=>{
          console.log("im fetch from database")
          console.log()
         
-       }}, [])
+    //    }
+    }
+       , [])
 
 
 return <div>
