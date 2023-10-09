@@ -9,7 +9,7 @@ try {
 
    console.log("Data base conected successFully")
 
-   const committee = await Committee.find({}, 'name _id photo');
+   const committee = await Committee.find({}).select("-password -username -email -description");
 console.log(committee)
 return new Response(JSON.stringify({data:committee, msg:"data fetch from server" , type:"success" , ok:true}) , {status:200})
    
