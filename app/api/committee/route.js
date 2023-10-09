@@ -9,17 +9,17 @@ try {
 
    console.log("Data base conected successFully")
 
-   const committee = await Committee.find({}).lean();
-   const committeesWithoutPassword = committee.map(comm => {
-    // Exclude the "password" field from each document
-    delete comm.password;
-    delete comm.username;
-    delete comm.email;
-    delete comm.description;
-    return comm;
-  });
-console.log(committeesWithoutPassword)
-return new Response(JSON.stringify({data:committeesWithoutPassword, msg:"data fetch from server" , type:"success" , ok:true}) , {status:200})
+   const committee = await Committee.find({});
+//    const committeesWithoutPassword = committee.map(comm => {
+//     // Exclude the "password" field from each document
+//     delete comm.password;
+//     delete comm.username;
+//     delete comm.email;
+//     delete comm.description;
+//     return comm;
+//   });
+console.log(committee)
+return new Response(JSON.stringify({data:committee, msg:"data fetch from server" , type:"success" , ok:true}) , {status:200})
    
 
 
