@@ -43,7 +43,7 @@ const Committe =()=>{
   
         // if( committeeData.length===0) {
        const fetchData = async()=>{
-        const res = await fetch(`/api/committee`)
+        const res = await fetch(`/api/committee/`)
         const data = await res.json()
     
         console.log("ima fetch inital data")

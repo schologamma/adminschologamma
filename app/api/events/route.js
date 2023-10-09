@@ -10,8 +10,13 @@ export const GET = async(req )=>{
     try {
         await connectToDB() ;
         console.log("Database connected Sucesssfully")
+    const check = await Events.find({})
+    if(!check){
+    return new Response(JSON.stringify({msg:"Data events are not successFully" ,data:check , ok:false}) , {status:200})
+
+    }
     
-    const check = await Events.find({}).populate('organizer','name photo')
+    // const check = await Events.find({}).populate('organizer','name photo')
    
     return new Response(JSON.stringify({msg:"Data events fetch successFully" ,data:check , ok:true}) , {status:200})
     
