@@ -17,7 +17,7 @@ function AddCard({params}) {
     const [committeeList,setCommitteeList] = useState([])
 useEffect(() =>  {
   
-    if( committeeList.length===0) {
+    // if( committeeList.length===0) {
    const fetchData = async()=>{
     const res = await fetch('/api/committee')
     const data = await res.json()
@@ -29,7 +29,8 @@ useEffect(() =>  {
      console.log("im fetch from database")
      console.log()
     
-   }}, [])
+//    }
+}, [])
 
 // create the hook for storing the data
 const[profileData ,setProfileData] = useState({
@@ -244,7 +245,7 @@ console.log(profileData)
 // connect with databse here :
 console.log(imgUrl.result.secure_url)
 
-const res = await fetch(`/api/teams/${params.year}` , {
+const res = await fetch(`/api/teams/teamperson/${params.year}` , {
 method:"PUT",
 body:JSON.stringify({...profileData , photoUrl:imgUrl.result.secure_url , type:committeeId})
 
