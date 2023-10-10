@@ -9,7 +9,7 @@ try {
 
    console.log("Data base conected successFully")
 
-   const committee = await Committee.find({});
+   const codata = await Committee.find({});
 //    const committeesWithoutPassword = committee.map(comm => {
 //     // Exclude the "password" field from each document
 //     delete comm.password;
@@ -18,8 +18,8 @@ try {
 //     delete comm.description;
 //     return comm;
 //   });
-console.log(committee)
-return new Response(JSON.stringify({data:committee, msg:"data fetch from server" , type:"success" , ok:true}) , {status:200})
+console.log(codata)
+return new Response(JSON.stringify({data:codata, msg:"data fetch from server" , type:"success" , ok:true}) , {status:200})
    
 
 

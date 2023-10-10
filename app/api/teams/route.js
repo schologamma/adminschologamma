@@ -8,9 +8,9 @@ export const GET = async(req )=>{
         await connectToDB() ;
         console.log("Database connected Sucesssfully")
     
-    const check = await Teams.find({} ,'year')
+    const check1 = await Teams.find({} ,'year')
    
-    return new Response(JSON.stringify({msg:"Data Teams fetch successFully" ,data:check , ok:true}) , {status:200})
+    return new Response(JSON.stringify({msg:"Data Teams fetch successFully" ,data:check1 , ok:true}) , {status:200})
     
     } catch (error) {
     console.log(error)
