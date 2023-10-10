@@ -1,36 +1,38 @@
-"use client"
-import React, { useState } from 'react';
-import Modal from '@/components/Modal'; // Import your Modal component
+import {useSWR} from 'swr';
 
-function MyPage() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => {
-    setIsModalOpen(true);
+function YourComponent() {
+  // Define a function to fetch data
+  const fetcher = async (url) => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  // Specify the API route URL
+  const apiUrl = '/api/committee'; // Use the relative path to the API route
 
-  const Data = async()=>{
-  const res =await fetch('api/committee');
-    const data = await res.json()
-    console.log(data)
+  // Use SWR to fetch and manage the data
+  const { data, error } = useSWR(apiUrl, fetcher);
+
+  if (error) {
+    console.error('Error fetching data:', error);
   }
-  
-  Data();
+
   return (
     <div>
-      <button onClick={openModal} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-        Open Modal
-      </button>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h2 className="text-xl font-semibold">Modal Content</h2>
-        <p className="mt-2">This is the content of the modal.</p>
-      </Modal>
+      {data ? (
+        <ul>
+          {data.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 }
 
-export default MyPage;
+export default YourComponent;
